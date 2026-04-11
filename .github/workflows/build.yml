@@ -44,4 +44,5 @@ jobs:
           file: ./eggs/${{ matrix.directory }}/Dockerfile
           platforms: linux/amd64
           push: true
+          build-args: VERSION=${{ matrix.version }}
           tags: ghcr.io/dystopiko:${{ matrix.version }}

@@ -1,3 +1,4 @@
+ARG VERSION
 FROM --platform=$TARGETOS/$TARGETARCH memothelemo/eden:${VERSION} AS eden
 
 FROM --platform=$TARGETOS/$TARGETARCH debian:trixie-slim
