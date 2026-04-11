@@ -16,15 +16,16 @@ RUN apt update \
         ca-certificates \
         libcurl4 \
     && rm -rf /var/lib/apt/lists/* \
-    && useradd -d /home/container -s /bin/bash -m container
+    && useradd -d /home/container -m container
 
 USER container
 ENV USER=container HOME=/home/container
-
 WORKDIR /home/container
 
-COPY --from=eden --chown=container:container /app/eden /home/container/
-COPY --from=eden --chown=container:container /app/crates /home/container/
+RUN mkdir -p /home/container
+
+COPY --from=eden --chown=container:container /app/eden /home/container/eden
+COPY --from=eden --chown=container:container /app/crates /home/container/crates
 COPY --chown=container:container entrypoint.sh /entrypoint.sh
 
 CMD [ "/bin/bash", "/entrypoint.sh" ]
