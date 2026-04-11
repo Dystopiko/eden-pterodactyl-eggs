@@ -1,0 +1,47 @@
+name: Lay Eden Eggs
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - eggs/**
+
+jobs:
+  push:
+    name: "${{ matrix.version }}"
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - version: 2.2.1
+            directory: v2.x.x
+          - version: 2.2.0
+            directory: v2.x.x
+          - version: 2.1.0
+            directory: v2.x.x
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+        with:
+          buildkitd-flags: --debug
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: docker/build-push-action@v4
+        with:
+          context: ./eggs/${{ matrix.directory }}
+          file: ./eggs/${{ matrix.directory }}/Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: ghcr.io/${{ github.repository }}:${{ matrix.version }}
