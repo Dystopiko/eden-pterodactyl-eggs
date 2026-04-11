@@ -4,7 +4,7 @@ FROM --platform=$TARGETOS/$TARGETARCH memothelemo/eden:${VERSION} AS eden
 FROM --platform=$TARGETOS/$TARGETARCH debian:trixie-slim
 
 LABEL author="memothelemo" maintainer="dev@memothelemo.xyz"
-LABEL org.opencontainers.image.source="https://github.com/Dystopiko/eden-pterodactyl"
+LABEL org.opencontainers.image.source = "https://github.com/Dystopiko/eden-pterodactyl-eggs"
 LABEL org.opencontainers.image.licenses=AGPL
 
 ENV DEBIAN_FRONTEND=noninteractive
