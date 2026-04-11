@@ -16,7 +16,7 @@ RUN apt update \
         ca-certificates \
         libcurl4 \
     && rm -rf /var/lib/apt/lists/* \
-    && useradd -m -d /home/container -s /bin/bash container
+    && useradd -d /home/container -s /bin/bash -m container
 
 USER container
 ENV USER=container HOME=/home/container
