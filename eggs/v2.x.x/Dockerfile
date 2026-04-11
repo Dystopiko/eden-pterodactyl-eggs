@@ -9,12 +9,15 @@ LABEL org.opencontainers.image.licenses=AGPL
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Required dependencies to run Eden
+# Required dependencies to run Eden (and entrypoint.sh)
 # https://github.com/Dystopiko/eden/blob/c7631dd147f25523505349e5757a414ae4bd883d/Dockerfile#L61-L62
 RUN apt update \
     && apt install -y --no-install-recommends \
         ca-certificates \
         libcurl4 \
+        lsof \
+        openssl \
+        iproute2 \
     && rm -rf /var/lib/apt/lists/* \
     && useradd -d /home/container -m container
 
