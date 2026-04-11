@@ -40,7 +40,7 @@ jobs:
 
       - uses: docker/build-push-action@v4
         with:
-          context: ./eggs/${{ matrix.directory }}
+          context: ./eggs
           file: ./eggs/${{ matrix.directory }}/Dockerfile
           platforms: linux/amd64
           push: true

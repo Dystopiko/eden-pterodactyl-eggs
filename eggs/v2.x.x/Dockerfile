@@ -1,4 +1,4 @@
-ARG VERSION
+ARG VERSION=""
 FROM --platform=$TARGETOS/$TARGETARCH memothelemo/eden:${VERSION} AS eden
 
 FROM --platform=$TARGETOS/$TARGETARCH debian:trixie-slim
@@ -25,6 +25,6 @@ WORKDIR /home/container
 
 COPY --from=eden --chown=container:container /app/eden /home/container/
 COPY --from=eden --chown=container:container /app/crates /home/container/
-COPY --chown=container:container ./../entrypoint.sh /entrypoint.sh
+COPY --chown=container:container entrypoint.sh /entrypoint.sh
 
 CMD [ "/bin/bash", "/entrypoint.sh" ]
