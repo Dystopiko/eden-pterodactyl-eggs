@@ -43,6 +43,7 @@ jobs:
           context: ./eggs
           file: ./eggs/${{ matrix.directory }}/Dockerfile
           platforms: linux/amd64
+          visibility: public
           push: true
           build-args: VERSION=${{ matrix.version }}
           tags: ghcr.io/dystopiko/eden:${{ matrix.version }}
